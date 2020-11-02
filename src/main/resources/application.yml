@@ -1,0 +1,25 @@
+spring:
+  data:
+    cassandra:
+      keyspace-name: demo
+      contact-points: 127.0.0.1
+      port: 9042
+      local-datacenter: datacenter1
+
+logging:
+  level:
+    com: info
+    org: info
+
+management:
+  health:
+    cassandra:
+      enabled: true
+
+cassandra:
+  migration:
+    keyspace-name: demo
+    script-location: cassandra/migration
+#    strategy: FAIL_ON_DUPLICATES
+#    consistency-level: ANY
+    table-prefix: acm_

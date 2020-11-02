@@ -1,0 +1,22 @@
+version: '3'
+services:
+  cassandra:
+    image: cassandra:latest
+    ports:
+      - "7000:7000"
+      - "44446:44446"
+      - "9042:9042"
+    networks:
+      mynet:
+        aliases:
+          - cassandra
+    volumes:
+      - "./cassandra-init.sh:/cassandra-init.sh"
+    command: "sh /cassandra-init.sh"
+    healthcheck:
+      test: ["CMD-SHELL", "[ $$(nodetool statusgossip) = running ]"]
+
+networks:
+  mynet:
+    ipam:
+      driver: default
